@@ -1,0 +1,29 @@
+version: "2.1"
+
+services:
+    javaserver:
+        build:
+            context: .
+            dockerfile: Dockerfile-Java.dockerfile
+        image: java
+       
+
+    sqlserver:
+        build:
+            context: .
+            dockerfile: Dockerfile-SQLServer.dockerfile
+            args:
+                ISOLATION: "hyperv"
+        image: worldwideimporters
+        
+    sqlserver2:
+        build:
+            context: .
+            dockerfile: Dockerfile-SQLServer.dockerfile
+            args:
+                ISOLATION: "hyperv"
+        image: worldwideimporters
+
+        
+       
+

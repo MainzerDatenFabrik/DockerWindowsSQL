@@ -28,6 +28,7 @@ Add-SqlLogin -ServerInstance localhost -LoginName $Username -LoginType SqlLogin 
 Write-Verbose "Created SQL login for user $Username."
  
 # Create user for WideWorldImporters database
+
 $Server = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList localhost
 $Database = $Server.Databases['WideWorldImporters']
  
@@ -41,5 +42,3 @@ Invoke-Sqlcmd -ServerInstance localhost -Database WideWorldImporters -Query "ALT
 Invoke-Sqlcmd -ServerInstance localhost -Database WideWorldImporters -Query "ALTER ROLE db_datawriter ADD MEMBER $Username"
 Write-Verbose "Granted user $Username read and write access to Database: WideWorldImporters."
  
-# This is the CMD script from the parent Docker image (microsoft/mssql-server-windows-express). By running it we inherit its functionality.
-.\start.ps1 -sa_password $env:sa_password -ACCEPT_EULA $env:ACCEPT_EULA -attach_dbs "$env:attach_dbs" -Verbose
